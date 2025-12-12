@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rajwant Sarma | AI Engineer</title>
+    <title>Rajwant Sarma | AI Architect</title>
     <meta name="description" content="Portfolio of an AI & Machine Learning Engineer">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Plus Jakarta Sans (Modern) & Space Grotesk (Tech) -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Fonts: Space Grotesk (Futuristic) & Inter (Clean) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -20,31 +20,35 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
                         mono: ['Space Grotesk', 'monospace'],
                     },
                     colors: {
-                        ai: {
-                            bg: '#030712',      // Rich Black
-                            card: 'rgba(17, 24, 39, 0.7)', // Glassy Dark
-                            accent: '#8b5cf6',  // Violet 500
-                            cyan: '#06b6d4',    // Cyan 500
-                            text: '#f3f4f6',    // Gray 100
-                            muted: '#9ca3af',   // Gray 400
+                        void: '#000205',      // Absolute Black
+                        glass: 'rgba(255, 255, 255, 0.03)',
+                        neon: {
+                            blue: '#00f3ff',  // Electric Blue
+                            purple: '#bd00ff', // Cyber Purple
+                            green: '#0aff68', // Data Green
                         }
                     },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'holo-gradient': 'linear-gradient(135deg, rgba(0,243,255,0.1) 0%, rgba(189,0,255,0.1) 100%)',
+                    },
                     animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'glow': 'glow 3s ease-in-out infinite alternate',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'scan': 'scan 2s linear infinite',
+                        'blink': 'blink 1s step-end infinite',
                     },
                     keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
+                        scan: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100%)' },
                         },
-                        glow: {
-                            '0%': { boxShadow: '0 0 20px rgba(139, 92, 246, 0.1)' },
-                            '100%': { boxShadow: '0 0 40px rgba(139, 92, 246, 0.4)' },
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' },
                         }
                     }
                 }
@@ -53,184 +57,295 @@
     </script>
 
     <style>
-        /* Modern Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #030712;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1f2937;
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #8b5cf6;
+        body {
+            background-color: #000205;
+            color: #e2e8f0;
+            overflow-x: hidden;
         }
 
-        /* Gradient Text */
-        .text-gradient {
-            background: linear-gradient(135deg, #c4b5fd 0%, #8b5cf6 50%, #06b6d4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000205; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f3ff; }
+
+        /* Neon Glow Text */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
         }
 
-        /* Glass Card Effect */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
+        /* Holographic Card */
+        .holo-card {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            box-shadow: 0 0 0 1px rgba(0, 243, 255, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
         
-        /* Particle Canvas */
+        .holo-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(0, 243, 255, 0.05) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .holo-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 243, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
+        }
+        
+        .holo-card:hover::before { opacity: 1; }
+
+        /* Scanner Animation Line */
+        .scan-line {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 50%;
+            background: linear-gradient(to bottom, transparent, rgba(0, 243, 255, 0.2), transparent);
+            transform: translateY(-150%);
+            transition: transform 0.5s;
+        }
+        .holo-card:hover .scan-line {
+            animation: scan 1.5s ease-in-out infinite;
+        }
+
         #neural-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            opacity: 0.4;
+            opacity: 0.6;
+        }
+        
+        .typewriter-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: #00f3ff;
         }
     </style>
 </head>
-<body class="bg-ai-bg text-ai-text antialiased selection:bg-ai-accent selection:text-white overflow-x-hidden">
+<body class="antialiased selection:bg-neon-blue selection:text-black">
 
-    <!-- Neural Network Background -->
+    <!-- Interactive Background -->
     <canvas id="neural-canvas"></canvas>
+    <div class="fixed inset-0 bg-gradient-radial from-transparent via-void/80 to-void z-[-1] pointer-events-none"></div>
 
-    <!-- Floating Navbar -->
-    <nav class="fixed w-full z-50 top-4 px-4">
-        <div class="max-w-5xl mx-auto glass-card rounded-full px-6 py-3 flex items-center justify-between border-white/10">
-            <a href="#" class="text-xl font-bold font-mono tracking-tighter flex items-center gap-2">
-                <div class="w-3 h-3 rounded-full bg-ai-accent animate-pulse"></div>
-                RAJWANT<span class="text-ai-muted">.AI</span>
-            </a>
+    <!-- HUD Navbar -->
+    <nav class="fixed w-full z-50 top-0 border-b border-white/5 bg-void/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded bg-gradient-to-tr from-neon-blue to-neon-purple flex items-center justify-center animate-pulse-slow">
+                    <i data-lucide="cpu" class="text-black w-5 h-5"></i>
+                </div>
+                <span class="font-mono font-bold text-lg tracking-widest text-white">RAJWANT<span class="text-neon-blue">_AI</span></span>
+            </div>
             
-            <div class="hidden md:flex space-x-8 text-sm font-medium text-ai-muted">
-                <a href="#home" class="hover:text-white transition-colors">Home</a>
-                <a href="#about" class="hover:text-white transition-colors">About</a>
-                <a href="#projects" class="hover:text-white transition-colors">Projects</a>
-                <a href="#contact" class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all border border-white/10">Contact</a>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-mono text-gray-400">
+                <a href="#home" class="hover:text-neon-blue transition-colors">./HOME</a>
+                <a href="#about" class="hover:text-neon-blue transition-colors">./DATA</a>
+                <a href="#projects" class="hover:text-neon-blue transition-colors">./PROJECTS</a>
+                <a href="#contact" class="px-5 py-2 border border-neon-blue/30 text-neon-blue hover:bg-neon-blue hover:text-black transition-all rounded-sm">
+                    INIT_CONTACT
+                </a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative pt-20">
-        <!-- Glow Effect behind text -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-ai-accent/20 rounded-full blur-[120px] -z-10"></div>
-
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-ai-cyan/30 bg-ai-cyan/5 text-ai-cyan text-xs font-mono mb-8 animate-float">
-                <i data-lucide="sparkles" class="w-3 h-3"></i>
-                Artificial Intelligence & Deep Learning
+    <section id="home" class="min-h-screen flex items-center justify-center relative pt-20 px-6">
+        <div class="max-w-5xl w-full grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Text Content -->
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 mb-8 border border-neon-green/30 bg-neon-green/5 text-neon-green text-xs font-mono tracking-widest uppercase">
+                    <span class="w-2 h-2 rounded-full bg-neon-green animate-pulse"></span>
+                    System Online // Ready for Deployment
+                </div>
+                
+                <h1 class="text-6xl md:text-8xl font-bold tracking-tighter text-white mb-6">
+                    ENGINEERING <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple text-glow">SENTIENCE</span>
+                </h1>
+                
+                <div class="h-8 font-mono text-xl text-neon-blue mb-8 typewriter-cursor">
+                    > <span id="typewriter"></span>
+                </div>
+                
+                <p class="text-gray-400 text-lg mb-10 leading-relaxed max-w-lg">
+                    I am Rajwant Sarma, an AI Architect designing the neural pathways of tomorrow. Specializing in Deep Learning, Computer Vision, and Predictive Analytics.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="px-8 py-4 bg-white text-black font-bold font-mono hover:bg-neon-blue hover:scale-105 transition-all">
+                        VIEW_MODULES
+                    </a>
+                    <a href="https://github.com/Roxstar21" target="_blank" class="px-8 py-4 border border-white/20 text-white font-mono hover:border-neon-purple hover:text-neon-purple transition-all">
+                        GITHUB_REPO
+                    </a>
+                </div>
             </div>
-            
-            <h1 class="text-5xl md:text-8xl font-bold tracking-tight mb-6 font-sans">
-                Building the <br>
-                <span class="text-gradient">Intelligent Future</span>
-            </h1>
-            
-            <p class="text-xl text-ai-muted mb-10 max-w-2xl mx-auto leading-relaxed font-light">
-                Hi, I'm <strong class="text-white">Rajwant Sarma</strong>. A Data Scientist and AI Engineer crafting scalable neural networks and data-driven solutions.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="#projects" class="group relative px-8 py-4 bg-white text-black font-bold rounded-full transition-all hover:scale-105 hover:shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
-                    View Projects
-                    <i data-lucide="arrow-right" class="w-4 h-4 inline-block ml-1 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-                <a href="https://github.com/Roxstar21" target="_blank" class="px-8 py-4 rounded-full border border-white/10 hover:bg-white/5 text-white font-medium transition-all backdrop-blur-sm">
-                    GitHub Profile
-                </a>
+
+            <!-- 3D/Visual Element -->
+            <div class="relative hidden md:block">
+                <!-- Abstract Orb Animation -->
+                <div class="absolute inset-0 bg-neon-blue/20 blur-[100px] rounded-full animate-pulse-slow"></div>
+                <div class="holo-card p-8 rounded-2xl border-l-4 border-neon-blue">
+                    <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+                        <span class="text-xs font-mono text-neon-blue">SYSTEM_DIAGNOSTICS</span>
+                        <span class="text-xs font-mono text-green-400">OPTIMAL</span>
+                    </div>
+                    <div class="space-y-6 font-mono text-sm">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>Neural Processing</span>
+                                <span class="text-neon-blue">98%</span>
+                            </div>
+                            <div class="h-1 bg-white/10 w-full"><div class="h-full bg-neon-blue w-[98%] shadow-[0_0_10px_#00f3ff]"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>Model Accuracy</span>
+                                <span class="text-neon-purple">96.5%</span>
+                            </div>
+                            <div class="h-1 bg-white/10 w-full"><div class="h-full bg-neon-purple w-[96.5%] shadow-[0_0_10px_#bd00ff]"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span>Data Throughput</span>
+                                <span class="text-neon-green">10TB/s</span>
+                            </div>
+                            <div class="h-1 bg-white/10 w-full"><div class="h-full bg-neon-green w-full shadow-[0_0_10px_#0aff68]"></div></div>
+                        </div>
+                        <div class="pt-4 text-xs text-gray-500">
+                            > Initializing Core Protocols...<br>
+                            > Loading Weights...<br>
+                            > Ready.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack / About -->
+    <!-- Tech Stack (Data Nodes) -->
     <section id="about" class="py-32 relative">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                
-                <!-- Info -->
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Engineering <span class="text-ai-accent">Cognition</span></h2>
-                    <div class="space-y-6 text-ai-muted text-lg leading-relaxed font-light">
-                        <p>
-                            I am a <strong class="text-white">3rd-year Electronics and Computer Engineering student at VIT Chennai</strong>, bridging the gap between hardware efficiency and software intelligence.
-                        </p>
-                        <p>
-                            My passion lies in decoding the mathematics behind Machine Learning. Whether it's optimizing CNN architectures or deploying NLP models, I strive for precision and performance.
-                        </p>
-                    </div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16">
+                <h2 class="text-4xl font-bold text-white mb-2">Technical <span class="text-neon-purple">Architecture</span></h2>
+                <div class="h-1 w-20 bg-gradient-to-r from-neon-blue to-transparent"></div>
+            </div>
 
-                    <div class="mt-8 flex flex-wrap gap-3">
-                        <!-- Badges -->
-                        <div class="px-4 py-2 glass-card rounded-lg flex items-center gap-2">
-                            <i data-lucide="cpu" class="text-ai-cyan w-5 h-5"></i>
-                            <span class="text-sm font-mono">Deep Learning</span>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Node 1 -->
+                <div class="holo-card p-6 rounded-xl hover:border-neon-blue/50 group">
+                    <i data-lucide="brain-circuit" class="w-10 h-10 text-neon-blue mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">Deep Learning</h3>
+                    <p class="text-sm text-gray-400">TensorFlow, PyTorch, Keras</p>
+                </div>
+                <!-- Node 2 -->
+                <div class="holo-card p-6 rounded-xl hover:border-neon-purple/50 group">
+                    <i data-lucide="eye" class="w-10 h-10 text-neon-purple mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">Computer Vision</h3>
+                    <p class="text-sm text-gray-400">OpenCV, YOLO, CNNs</p>
+                </div>
+                <!-- Node 3 -->
+                <div class="holo-card p-6 rounded-xl hover:border-neon-green/50 group">
+                    <i data-lucide="message-square-code" class="w-10 h-10 text-neon-green mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">NLP</h3>
+                    <p class="text-sm text-gray-400">Transformers, BERT, NLTK</p>
+                </div>
+                <!-- Node 4 -->
+                <div class="holo-card p-6 rounded-xl hover:border-white/50 group">
+                    <i data-lucide="database" class="w-10 h-10 text-white mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-xl font-bold text-white mb-2">Big Data</h3>
+                    <p class="text-sm text-gray-400">Pandas, SQL, Spark</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects (Holographic Cards) -->
+    <section id="projects" class="py-32 bg-white/[0.02]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-16">
+                <div>
+                    <h2 class="text-4xl font-bold text-white mb-2">Deployed <span class="text-neon-blue">Models</span></h2>
+                    <div class="h-1 w-20 bg-gradient-to-r from-neon-purple to-transparent"></div>
+                </div>
+                <div class="text-xs font-mono text-gray-500 border border-white/10 px-3 py-1 rounded hidden md:block">
+                    INDEXING: 3 ITEMS FOUND
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="holo-card rounded-2xl group">
+                    <div class="scan-line"></div> <!-- Animated Scanner -->
+                    <div class="h-56 bg-gradient-to-b from-gray-900 to-black flex items-center justify-center relative overflow-hidden border-b border-white/5">
+                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                        <i data-lucide="scan-face" class="w-16 h-16 text-neon-blue opacity-80 group-hover:scale-110 group-hover:text-white transition-all duration-500"></i>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex gap-2 mb-4">
+                            <span class="text-[10px] font-mono border border-neon-blue text-neon-blue px-2 py-0.5 rounded">CNN</span>
+                            <span class="text-[10px] font-mono border border-white/20 text-gray-400 px-2 py-0.5 rounded">PYTHON</span>
                         </div>
-                        <div class="px-4 py-2 glass-card rounded-lg flex items-center gap-2">
-                            <i data-lucide="network" class="text-ai-accent w-5 h-5"></i>
-                            <span class="text-sm font-mono">Neural Networks</span>
-                        </div>
-                        <div class="px-4 py-2 glass-card rounded-lg flex items-center gap-2">
-                            <i data-lucide="bar-chart-3" class="text-emerald-400 w-5 h-5"></i>
-                            <span class="text-sm font-mono">Data Science</span>
-                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-neon-blue transition-colors">Traffic Sign Recognition</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Autonomous vehicle perception system capable of classifying 40+ traffic signs with 98.5% accuracy using custom CNN architecture.
+                        </p>
+                        <a href="https://github.com/Roxstar21" class="text-sm font-bold font-mono text-neon-blue flex items-center gap-2 hover:text-white transition-colors">
+                            ACCESS_CODE <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Skills Visual -->
-                <div class="glass-card p-8 rounded-2xl border-l-4 border-ai-accent relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <i data-lucide="code-2" class="w-32 h-32"></i>
+                <!-- Project 2 -->
+                <div class="holo-card rounded-2xl group">
+                    <div class="scan-line"></div>
+                    <div class="h-56 bg-gradient-to-b from-gray-900 to-black flex items-center justify-center relative overflow-hidden border-b border-white/5">
+                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                        <i data-lucide="binary" class="w-16 h-16 text-neon-purple opacity-80 group-hover:scale-110 group-hover:text-white transition-all duration-500"></i>
                     </div>
-                    <h3 class="text-xl font-mono font-bold mb-8 text-white">SYSTEM_CAPABILITIES</h3>
-                    
-                    <div class="space-y-6">
-                        <!-- Skill Item -->
-                        <div>
-                            <div class="flex justify-between mb-2 text-sm">
-                                <span class="text-white">Python & TensorFlow</span>
-                                <span class="text-ai-cyan">95%</span>
-                            </div>
-                            <div class="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-ai-accent to-ai-cyan w-[95%]"></div>
-                            </div>
+                    <div class="p-8">
+                        <div class="flex gap-2 mb-4">
+                            <span class="text-[10px] font-mono border border-neon-purple text-neon-purple px-2 py-0.5 rounded">NLP</span>
+                            <span class="text-[10px] font-mono border border-white/20 text-gray-400 px-2 py-0.5 rounded">SCIKIT-LEARN</span>
                         </div>
-                        <!-- Skill Item -->
-                        <div>
-                            <div class="flex justify-between mb-2 text-sm">
-                                <span class="text-white">Computer Vision (OpenCV)</span>
-                                <span class="text-ai-cyan">90%</span>
-                            </div>
-                            <div class="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-ai-accent to-ai-cyan w-[90%]"></div>
-                            </div>
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-neon-purple transition-colors">Sentiment Analyzer</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Social media mining bot utilizing Natural Language Processing to detect public sentiment polarity from unstructured text data in real-time.
+                        </p>
+                        <a href="https://github.com/Roxstar21" class="text-sm font-bold font-mono text-neon-purple flex items-center gap-2 hover:text-white transition-colors">
+                            ACCESS_CODE <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="holo-card rounded-2xl group">
+                    <div class="scan-line"></div>
+                    <div class="h-56 bg-gradient-to-b from-gray-900 to-black flex items-center justify-center relative overflow-hidden border-b border-white/5">
+                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                        <i data-lucide="trending-up" class="w-16 h-16 text-neon-green opacity-80 group-hover:scale-110 group-hover:text-white transition-all duration-500"></i>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex gap-2 mb-4">
+                            <span class="text-[10px] font-mono border border-neon-green text-neon-green px-2 py-0.5 rounded">LSTM</span>
+                            <span class="text-[10px] font-mono border border-white/20 text-gray-400 px-2 py-0.5 rounded">TENSORFLOW</span>
                         </div>
-                        <!-- Skill Item -->
-                        <div>
-                            <div class="flex justify-between mb-2 text-sm">
-                                <span class="text-white">NLP & Scikit-learn</span>
-                                <span class="text-ai-cyan">85%</span>
-                            </div>
-                            <div class="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-ai-accent to-ai-cyan w-[85%]"></div>
-                            </div>
-                        </div>
-                        <!-- Skill Item -->
-                        <div>
-                            <div class="flex justify-between mb-2 text-sm">
-                                <span class="text-white">C++ & Java</span>
-                                <span class="text-ai-cyan">80%</span>
-                            </div>
-                            <div class="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-ai-accent to-ai-cyan w-[80%]"></div>
-                            </div>
-                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-neon-green transition-colors">Market Predictor</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Financial forecasting tool using Long Short-Term Memory networks (RNNs) to predict stock trends based on 10 years of historical dataset.
+                        </p>
+                        <a href="https://github.com/Roxstar21" class="text-sm font-bold font-mono text-neon-green flex items-center gap-2 hover:text-white transition-colors">
+                            ACCESS_CODE <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -238,149 +353,147 @@
         </div>
     </section>
 
-    <!-- Projects -->
-    <section id="projects" class="py-32">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                <div>
-                    <h2 class="text-3xl md:text-5xl font-bold mb-4">Selected Works</h2>
-                    <p class="text-ai-muted">A collection of AI models and applications.</p>
-                </div>
-                <a href="https://github.com/Roxstar21" class="text-ai-accent hover:text-white transition-colors flex items-center gap-2 pb-2 border-b border-ai-accent/30 hover:border-white">
-                    View GitHub Archive <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+    <!-- Footer -->
+    <footer id="contact" class="py-20 border-t border-white/10 bg-black relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-neon-blue to-transparent"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-3xl font-bold text-white mb-8">Initialize Collaboration?</h2>
+            
+            <div class="flex justify-center gap-8 mb-12">
+                <a href="mailto:rajwant.sarma@gmail.com" class="group flex flex-col items-center gap-2">
+                    <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-neon-blue group-hover:text-black transition-all">
+                        <i data-lucide="mail" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-xs font-mono text-gray-500 group-hover:text-neon-blue">EMAIL</span>
+                </a>
+                <a href="https://www.linkedin.com/in/rajwant-sarma-67810528b/" target="_blank" class="group flex flex-col items-center gap-2">
+                    <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-neon-purple group-hover:text-black transition-all">
+                        <i data-lucide="linkedin" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-xs font-mono text-gray-500 group-hover:text-neon-purple">LINKEDIN</span>
+                </a>
+                <a href="https://github.com/Roxstar21" target="_blank" class="group flex flex-col items-center gap-2">
+                    <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                        <i data-lucide="github" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-xs font-mono text-gray-500 group-hover:text-white">GITHUB</span>
                 </a>
             </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                
-                <!-- Card 1 -->
-                <div class="glass-card rounded-2xl p-6 hover:-translate-y-2 transition-transform duration-300 group">
-                    <div class="h-48 rounded-xl bg-gradient-to-br from-indigo-900 to-slate-900 mb-6 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-                        <i data-lucide="scan-face" class="w-12 h-12 text-white/70 group-hover:text-white group-hover:scale-110 transition-all duration-500"></i>
-                    </div>
-                    <div class="flex gap-2 mb-4">
-                        <span class="px-2 py-1 text-xs rounded bg-ai-accent/10 text-ai-accent border border-ai-accent/20">Computer Vision</span>
-                        <span class="px-2 py-1 text-xs rounded bg-white/5 text-ai-muted border border-white/10">CNN</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 group-hover:text-ai-cyan transition-colors">Traffic Sign Classifier</h3>
-                    <p class="text-ai-muted text-sm leading-relaxed mb-6">
-                        A high-accuracy model using Convolutional Neural Networks (CNNs) to detect and classify traffic signs in real-time video feeds with 98% validation accuracy.
-                    </p>
-                    <a href="https://github.com/Roxstar21" class="text-sm font-medium text-white flex items-center gap-2 opacity-70 group-hover:opacity-100 transition-opacity">
-                        View Code <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                    </a>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="glass-card rounded-2xl p-6 hover:-translate-y-2 transition-transform duration-300 group">
-                    <div class="h-48 rounded-xl bg-gradient-to-br from-violet-900 to-slate-900 mb-6 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-                        <i data-lucide="message-circle" class="w-12 h-12 text-white/70 group-hover:text-white group-hover:scale-110 transition-all duration-500"></i>
-                    </div>
-                    <div class="flex gap-2 mb-4">
-                        <span class="px-2 py-1 text-xs rounded bg-pink-500/10 text-pink-400 border border-pink-500/20">NLP</span>
-                        <span class="px-2 py-1 text-xs rounded bg-white/5 text-ai-muted border border-white/10">NLTK</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 group-hover:text-pink-400 transition-colors">Sentiment Analysis Bot</h3>
-                    <p class="text-ai-muted text-sm leading-relaxed mb-6">
-                        An automated Natural Language Processing pipeline that scrapes social media comments and categorizes public sentiment using Scikit-learn and NLTK.
-                    </p>
-                    <a href="https://github.com/Roxstar21" class="text-sm font-medium text-white flex items-center gap-2 opacity-70 group-hover:opacity-100 transition-opacity">
-                        View Code <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                    </a>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="glass-card rounded-2xl p-6 hover:-translate-y-2 transition-transform duration-300 group">
-                    <div class="h-48 rounded-xl bg-gradient-to-br from-emerald-900 to-slate-900 mb-6 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-                        <i data-lucide="trending-up" class="w-12 h-12 text-white/70 group-hover:text-white group-hover:scale-110 transition-all duration-500"></i>
-                    </div>
-                    <div class="flex gap-2 mb-4">
-                        <span class="px-2 py-1 text-xs rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Predictive AI</span>
-                        <span class="px-2 py-1 text-xs rounded bg-white/5 text-ai-muted border border-white/10">LSTM</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition-colors">Stock Market Predictor</h3>
-                    <p class="text-ai-muted text-sm leading-relaxed mb-6">
-                        A time-series forecasting model utilizing Long Short-Term Memory (LSTM) networks to predict stock price trends based on historical market data.
-                    </p>
-                    <a href="https://github.com/Roxstar21" class="text-sm font-medium text-white flex items-center gap-2 opacity-70 group-hover:opacity-100 transition-opacity">
-                        View Code <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer / Contact -->
-    <footer id="contact" class="py-20 border-t border-white/5 relative bg-black/20 backdrop-blur-lg">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-6">Ready to Collaborate?</h2>
-            <p class="text-ai-muted mb-8">
-                Currently open for Internships and Research opportunities.
-            </p>
-            <div class="flex justify-center gap-6 mb-12">
-                <a href="mailto:rajwant.sarma@gmail.com" class="p-4 rounded-full glass-card hover:bg-ai-accent hover:text-white transition-all">
-                    <i data-lucide="mail" class="w-6 h-6"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/rajwant-sarma-67810528b/" target="_blank" class="p-4 rounded-full glass-card hover:bg-[#0077b5] hover:text-white transition-all">
-                    <i data-lucide="linkedin" class="w-6 h-6"></i>
-                </a>
-                <a href="https://github.com/Roxstar21" target="_blank" class="p-4 rounded-full glass-card hover:bg-white hover:text-black transition-all">
-                    <i data-lucide="github" class="w-6 h-6"></i>
-                </a>
-            </div>
-            <p class="text-sm text-ai-muted font-mono">
-                © 2025 Rajwant Sarma. All Systems Operational.
+            
+            <p class="text-xs text-gray-600 font-mono">
+                SYSTEM ID: RAJWANT_SARMA // © 2025 // ALL SYSTEMS NOMINAL
             </p>
         </div>
     </footer>
 
-    <!-- Canvas Animation Script -->
+    <!-- Interactive Canvas Script -->
     <script>
         lucide.createIcons();
 
-        // Neural Network Animation
+        // Typewriter Effect
+        const phrases = ["Building Neural Networks...", "Analyzing Big Data...", "Optimizing Algorithms...", "Engineering Intelligence..."];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeSpeed = 100;
+        const deleteSpeed = 50;
+        const pauseTime = 2000;
+        const typewriterElement = document.getElementById('typewriter');
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                setTimeout(() => isDeleting = true, pauseTime);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+            }
+
+            const speed = isDeleting ? deleteSpeed : typeSpeed;
+            setTimeout(type, speed);
+        }
+        type();
+
+        // Interactive Neural Network Background
         const canvas = document.getElementById('neural-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
         let particles = [];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
 
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
+            initParticles();
         }
         window.addEventListener('resize', resize);
-        resize();
 
         class Particle {
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vx = (Math.random() - 0.5) * 0.5; // Slow movement
                 this.vy = (Math.random() - 0.5) * 0.5;
-                this.size = Math.random() * 2 + 1;
+                this.size = Math.random() * 2 + 0.5;
+                this.baseX = this.x;
+                this.baseY = this.y;
+                this.density = (Math.random() * 30) + 1;
             }
             update() {
+                // Movement
                 this.x += this.vx;
                 this.y += this.vy;
+
+                // Mouse interaction (Connect to mouse)
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    const forceDirectionX = dx / distance;
+                    const forceDirectionY = dy / distance;
+                    const maxDistance = mouse.radius;
+                    const force = (maxDistance - distance) / maxDistance;
+                    const directionX = forceDirectionX * force * this.density;
+                    const directionY = forceDirectionY * force * this.density;
+
+                    if (distance < mouse.radius) {
+                        // Subtle attraction to mouse
+                        this.x += directionX * 0.5; 
+                        this.y += directionY * 0.5;
+                    }
+                }
+
+                // Boundary bounce
                 if (this.x < 0 || this.x > width) this.vx *= -1;
                 if (this.y < 0 || this.y > height) this.vy *= -1;
             }
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(139, 92, 246, 0.5)'; // Violet dots
+                ctx.fillStyle = '#00f3ff'; // Neon Blue Dots
                 ctx.fill();
             }
         }
 
         function initParticles() {
             particles = [];
-            const count = Math.min(width * 0.1, 100); // Responsive count
-            for (let i = 0; i < count; i++) {
+            const particleCount = (width * height) / 15000; // Density calculation
+            for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
         }
@@ -391,19 +504,34 @@
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
-                
-                // Draw connections
+
+                // Connect particles
                 for (let j = i; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < 150) {
+                    const distance = Math.sqrt(dx*dx + dy*dy);
+
+                    if (distance < 120) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(139, 92, 246, ${0.15 - distance/1000})`; // Fading violet lines
-                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = `rgba(0, 243, 255, ${1 - distance/120})`; // Fading blue lines
+                        ctx.lineWidth = 0.5;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+                
+                // Connect to mouse
+                if (mouse.x != null) {
+                    const dx = particles[i].x - mouse.x;
+                    const dy = particles[i].y - mouse.y;
+                    const distance = Math.sqrt(dx*dx + dy*dy);
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(189, 0, 255, ${1 - distance/150})`; // Purple connection to mouse
+                        ctx.lineWidth = 0.8;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
                         ctx.stroke();
                     }
                 }
@@ -411,7 +539,7 @@
             requestAnimationFrame(animate);
         }
 
-        initParticles();
+        resize();
         animate();
     </script>
 </body>
