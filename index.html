@@ -6,13 +6,10 @@
     <title>Rajwant Sarma | AI Architect</title>
     <meta name="description" content="Portfolio of Rajwant Sarma - AI & Machine Learning Engineer">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font: Inter (The Gold Standard for UI) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     
-    <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
@@ -31,7 +28,8 @@
                             500: '#737373',
                             800: '#262626',
                             900: '#171717',
-                        }
+                        },
+                        accent: '#00e676' // Added a subtle accent color variable
                     },
                     animation: {
                         'fade-in': 'fadeIn 1s ease-out forwards',
@@ -59,7 +57,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Subtle Grid Background - Barely Visible */
+        /* Subtle Grid Background */
         .bg-grid {
             background-size: 40px 40px;
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
@@ -67,16 +65,18 @@
             mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
         }
 
-        /* Hover Reveal Effect for Cards */
+        /* Card Hover Effects */
         .project-card {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 1;
         }
         .project-card:hover {
             background: rgba(255, 255, 255, 0.03);
             border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
         
-        /* Custom Selection Color */
         ::selection {
             background: #ffffff;
             color: #000000;
@@ -85,10 +85,8 @@
 </head>
 <body class="antialiased">
 
-    <!-- Subtle Background Grid -->
     <div class="fixed inset-0 bg-grid pointer-events-none z-[-1]"></div>
 
-    <!-- Navigation -->
     <nav class="fixed w-full z-50 top-0 bg-black/80 backdrop-blur-xl border-b border-white/5">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             <a href="#" class="text-sm font-semibold tracking-tight hover:text-grey-500 transition-colors">
@@ -103,11 +101,9 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="min-h-screen flex flex-col justify-center px-6 pt-20">
         <div class="max-w-6xl mx-auto w-full grid md:grid-cols-12 gap-12">
             
-            <!-- Main Headline -->
             <div class="md:col-span-8 space-y-8 animate-slide-up">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-grey-500">
                     <span class="relative flex h-2 w-2">
@@ -123,14 +119,13 @@
                 </h1>
                 
                 <p class="text-xl md:text-2xl text-grey-500 font-light max-w-2xl leading-relaxed">
-                    I am an AI Architect based in Chennai. I build scalable neural networks and deploy intelligent systems that solve complex problems.
+                    I am an AI Architect based in Chennai. I build scalable neural networks and deploy institutional-grade systems that solve complex problems.
                 </p>
 
                 <div class="flex flex-wrap items-center gap-6 pt-4">
                     <a href="#work" class="px-8 py-3 bg-white text-black text-sm font-semibold rounded-full hover:bg-grey-100 transition-colors">
                         View Projects
                     </a>
-                    <!-- ADDED: Resume Download Button -->
                     <a href="resume.pdf" download class="px-8 py-3 border border-white/20 text-white text-sm font-semibold rounded-full hover:bg-white/10 transition-colors flex items-center gap-2">
                         <i data-lucide="download" class="w-4 h-4"></i> Download CV
                     </a>
@@ -140,7 +135,6 @@
                 </div>
             </div>
 
-            <!-- Minimal Stats -->
             <div class="md:col-span-4 flex flex-col justify-end pb-4 animate-slide-up" style="animation-delay: 0.2s;">
                 <div class="border-l border-white/10 pl-6 space-y-6">
                     <div>
@@ -152,15 +146,14 @@
                         <div class="text-xs text-grey-500 uppercase tracking-widest mt-1">Chennai Institute</div>
                     </div>
                     <div>
-                        <div class="text-3xl font-bold">98%</div>
-                        <div class="text-xs text-grey-500 uppercase tracking-widest mt-1">Model Accuracy</div>
+                        <div class="text-3xl font-bold">3</div>
+                        <div class="text-xs text-grey-500 uppercase tracking-widest mt-1">Deployed AI Systems</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack (Minimal List) -->
     <section id="stack" class="py-32 border-t border-white/5">
         <div class="max-w-6xl mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-8">
@@ -168,121 +161,131 @@
                     Core Stack
                 </div>
                 <div class="md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8">
-                    <!-- Item -->
                     <div class="group">
                         <div class="text-white text-lg font-semibold mb-2 group-hover:translate-x-2 transition-transform duration-300">TensorFlow & Keras</div>
                         <div class="text-grey-500 text-sm">Deep Learning Architecture</div>
                     </div>
-                    <!-- Item -->
                     <div class="group">
                         <div class="text-white text-lg font-semibold mb-2 group-hover:translate-x-2 transition-transform duration-300">PyTorch</div>
-                        <div class="text-grey-500 text-sm">Research & Prototyping</div>
+                        <div class="text-grey-500 text-sm">Research & NLP</div>
                     </div>
-                    <!-- Item -->
                     <div class="group">
                         <div class="text-white text-lg font-semibold mb-2 group-hover:translate-x-2 transition-transform duration-300">Computer Vision</div>
-                        <div class="text-grey-500 text-sm">OpenCV, YOLO, CNNs</div>
+                        <div class="text-grey-500 text-sm">OpenCV, CNNs, YOLO</div>
                     </div>
-                    <!-- Item -->
                     <div class="group">
-                        <div class="text-white text-lg font-semibold mb-2 group-hover:translate-x-2 transition-transform duration-300">NLP</div>
-                        <div class="text-grey-500 text-sm">Transformers, NLTK</div>
+                        <div class="text-white text-lg font-semibold mb-2 group-hover:translate-x-2 transition-transform duration-300">LLMs & Transformers</div>
+                        <div class="text-grey-500 text-sm">HuggingFace, BERT, FinBERT</div>
                     </div>
-                    <!-- Item -->
                     <div class="group">
                         <div class="text-white text-lg font-semibold mb-2 group-hover:translate-x-2 transition-transform duration-300">Data Science</div>
                         <div class="text-grey-500 text-sm">Pandas, NumPy, Scikit-learn</div>
                     </div>
-                    <!-- Item -->
                     <div class="group">
                         <div class="text-white text-lg font-semibold mb-2 group-hover:translate-x-2 transition-transform duration-300">Deployment</div>
-                        <div class="text-grey-500 text-sm">Flask, Docker, AWS</div>
+                        <div class="text-grey-500 text-sm">Streamlit, Docker, Git</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects (Clean Cards) -->
     <section id="work" class="py-32 border-t border-white/5">
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex justify-between items-end mb-20">
                 <h2 class="text-4xl font-bold tracking-tight">Selected Work</h2>
-                <a href="https://github.com/Roxstar21" class="text-sm text-grey-500 hover:text-white transition-colors flex items-center gap-2">
+                <a href="https://github.com/Roxstar21" target="_blank" class="text-sm text-grey-500 hover:text-white transition-colors flex items-center gap-2">
                     View Archive <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </a>
             </div>
 
-            <div class="space-y-4">
+            <div class="space-y-6">
                 
-                <!-- Project 1 -->
-                <a href="https://github.com/Roxstar21/Traffic_Brain" class="project-card block p-8 md:p-12 rounded-2xl border border-white/5 bg-black hover:border-white/20">
+                <div class="project-card block p-8 md:p-12 rounded-2xl border border-white/5 bg-black">
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div>
                             <div class="flex items-center gap-3 mb-3">
-                                <span class="w-2 h-2 rounded-full bg-white"></span>
+                                <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                <span class="text-xs font-medium text-grey-500 uppercase tracking-widest">Natural Language Processing</span>
+                            </div>
+                            <h3 class="text-3xl font-bold mb-2">Sentinel Pro: Financial NLP</h3>
+                            <p class="text-grey-500 max-w-xl text-lg font-light">
+                                An institutional-grade sentiment engine powered by FinBERT-Tone. Features <50ms latency, bulk CSV processing, and a Bloomberg-style terminal for strategic market intelligence.
+                            </p>
+                            <div class="mt-4 flex gap-3 text-xs font-mono text-grey-500">
+                                <span>PyTorch</span> • <span>Transformers</span> • <span>Streamlit</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <a href="https://github.com/Roxstar21/Sentinel-Financial-NLP" target="_blank" class="text-grey-500 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
+                                <i data-lucide="github" class="w-4 h-4"></i> Source
+                            </a>
+                            <a href="https://sentinel-financial-nlp.streamlit.app" target="_blank" class="bg-white text-black px-6 py-3 rounded-full hover:bg-grey-200 transition-colors flex items-center gap-2 text-sm font-bold">
+                                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card block p-8 md:p-12 rounded-2xl border border-white/5 bg-black">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                <span class="text-xs font-medium text-grey-500 uppercase tracking-widest">Quantitative Finance</span>
+                            </div>
+                            <h3 class="text-3xl font-bold mb-2">QuantumTrend Pro</h3>
+                            <p class="text-grey-500 max-w-xl text-lg font-light">
+                                Deep Learning (LSTM) time-series forecasting model for stock assets. Integrates real-time Technical Analysis (RSI, SMA) and interactive visualization for market prediction.
+                            </p>
+                            <div class="mt-4 flex gap-3 text-xs font-mono text-grey-500">
+                                <span>TensorFlow</span> • <span>LSTM</span> • <span>Plotly</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <a href="https://github.com/Roxstar21/QuantumTrend-Finance-AI" target="_blank" class="text-grey-500 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
+                                <i data-lucide="github" class="w-4 h-4"></i> Source
+                            </a>
+                            <a href="https://quantumtrend-finance-ai.streamlit.app" target="_blank" class="bg-white text-black px-6 py-3 rounded-full hover:bg-grey-200 transition-colors flex items-center gap-2 text-sm font-bold">
+                                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card block p-8 md:p-12 rounded-2xl border border-white/5 bg-black">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="w-2 h-2 rounded-full bg-red-500"></span>
                                 <span class="text-xs font-medium text-grey-500 uppercase tracking-widest">Computer Vision</span>
                             </div>
-                            <h3 class="text-3xl font-bold mb-2">Neural Traffic Recognition</h3>
+                            <h3 class="text-3xl font-bold mb-2">Apex Vision // Autonomous</h3>
                             <p class="text-grey-500 max-w-xl text-lg font-light">
-                                A high-precision CNN trained on the GTSRB dataset to classify 43 types of traffic signs for autonomous vehicle systems.
+                                A high-precision CNN trained on the GTSRB dataset to classify 43 unique traffic signs. Designed as a legacy-compatible neural node for autonomous vehicle subsystems.
                             </p>
-                        </div>
-                        <div class="flex items-center gap-4 text-sm font-medium">
-                            <span class="text-grey-500">Python</span>
-                            <span class="text-grey-500">TensorFlow</span>
-                            <span class="bg-white text-black px-4 py-2 rounded-full">View Code</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Project 2 -->
-                <a href="https://github.com/Roxstar21" class="project-card block p-8 md:p-12 rounded-2xl border border-white/5 bg-black hover:border-white/20">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                        <div>
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="w-2 h-2 rounded-full bg-white"></span>
-                                <span class="text-xs font-medium text-grey-500 uppercase tracking-widest">NLP / Sentiment Analysis</span>
+                            <div class="mt-4 flex gap-3 text-xs font-mono text-grey-500">
+                                <span>Keras</span> • <span>OpenCV</span> • <span>TF Legacy</span>
                             </div>
-                            <h3 class="text-3xl font-bold mb-2">Social Sentiment Bot</h3>
-                            <p class="text-grey-500 max-w-xl text-lg font-light">
-                                An automated pipeline utilizing TF-IDF vectorization and Logistic Regression to interpret user sentiment from unstructured text data.
-                            </p>
                         </div>
-                        <div class="flex items-center gap-4 text-sm font-medium">
-                            <span class="text-grey-500">Scikit-learn</span>
-                            <span class="text-grey-500">NLTK</span>
-                            <span class="bg-white text-black px-4 py-2 rounded-full">View Code</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Project 3 -->
-                <a href="https://github.com/Roxstar21" class="project-card block p-8 md:p-12 rounded-2xl border border-white/5 bg-black hover:border-white/20">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                        <div>
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="w-2 h-2 rounded-full bg-white"></span>
-                                <span class="text-xs font-medium text-grey-500 uppercase tracking-widest">Predictive Analytics</span>
-                            </div>
-                            <h3 class="text-3xl font-bold mb-2">Market Trend Forecaster</h3>
-                            <p class="text-grey-500 max-w-xl text-lg font-light">
-                                Time-series forecasting model using LSTM (Long Short-Term Memory) networks to predict financial market trends with high accuracy.
-                            </p>
-                        </div>
-                        <div class="flex items-center gap-4 text-sm font-medium">
-                            <span class="text-grey-500">Keras</span>
-                            <span class="text-grey-500">Pandas</span>
-                            <span class="bg-white text-black px-4 py-2 rounded-full">View Code</span>
+                        
+                        <div class="flex items-center gap-4">
+                            <a href="https://github.com/Roxstar21/Apex-Vision-Traffic-AI" target="_blank" class="text-grey-500 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
+                                <i data-lucide="github" class="w-4 h-4"></i> Source
+                            </a>
+                            <a href="https://apex-vision-traffic-ai.streamlit.app" target="_blank" class="bg-white text-black px-6 py-3 rounded-full hover:bg-grey-200 transition-colors flex items-center gap-2 text-sm font-bold">
+                                <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+                            </a>
                         </div>
                     </div>
-                </a>
+                </div>
 
             </div>
         </div>
     </section>
 
-    <!-- Simple Footer -->
     <footer class="py-20 border-t border-white/5">
         <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
             <div>
