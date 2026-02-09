@@ -10,31 +10,31 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* THEME COLOR DEFINITIONS */
+        /* AESTHETIC THEME DEFINITIONS */
         :root {
-            --bg-color: #ffffff;
-            --text-main: #050505;
-            --text-muted: #737373;
-            --card-bg: #f9f9f9;
-            --border-color: rgba(0,0,0,0.1);
-            --accent-color: #06b6d4;
-            --grid-opacity: 0.05;
+            --bg-color: #f4f4f5; /* Soft Zinc 100 - Not pure white */
+            --text-main: #18181b; /* Zinc 900 */
+            --text-muted: #52525b; /* Zinc 600 */
+            --card-bg: #ffffff;
+            --border-color: rgba(0,0,0,0.08);
+            --accent-color: #0891b2; /* Cyan 600 */
+            --grid-opacity: 0.04;
         }
 
         [data-theme="dark"] {
-            --bg-color: #050505;
-            --text-main: #ffffff;
-            --text-muted: #a3a3a3;
-            --card-bg: #0f172a;
-            --border-color: rgba(255,255,255,0.1);
-            --accent-color: #22d3ee;
+            --bg-color: #09090b; /* Zinc 950 */
+            --text-main: #fafafa; /* Zinc 50 */
+            --text-muted: #a1a1aa; /* Zinc 400 */
+            --card-bg: #18181b; /* Zinc 900 */
+            --border-color: rgba(255,255,255,0.06);
+            --accent-color: #22d3ee; /* Cyan 400 */
             --grid-opacity: 0.03;
         }
 
         body { 
             background-color: var(--bg-color); 
             color: var(--text-main); 
-            transition: background-color 0.4s ease, color 0.4s ease;
+            transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease;
             font-family: 'Inter', sans-serif;
         }
 
@@ -43,124 +43,135 @@
             background-image: linear-gradient(to right, var(--text-main) 1px, transparent 1px),
                               linear-gradient(to bottom, var(--text-main) 1px, transparent 1px);
             opacity: var(--grid-opacity);
-            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
         }
 
         .project-card { 
             background-color: var(--card-bg); 
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .project-card:hover { border-color: var(--accent-color); transform: translateY(-4px); }
+        .project-card:hover { 
+            border-color: var(--accent-color); 
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
         
-        .nav-link { color: var(--text-muted); transition: color 0.2s; }
-        .nav-link:hover { color: var(--text-main); }
-
-        .btn-cv {
-            background-color: var(--accent-color);
-            color: #000;
-            font-weight: 700;
-            box-shadow: 0 0 15px var(--accent-color);
+        /* AESTHETIC RESUME BUTTON */
+        .btn-resume {
+            background: linear-gradient(135deg, var(--accent-color), #3b82f6);
+            color: #ffffff;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.25);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .btn-cv:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .btn-resume:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.4);
+            filter: brightness(1.05);
+        }
+
+        .nav-link { color: var(--text-muted); transition: color 0.3s; }
+        .nav-link:hover { color: var(--text-main); }
     </style>
 </head>
 <body class="antialiased" data-theme="dark">
 
     <div class="fixed inset-0 bg-grid pointer-events-none z-[-1]"></div>
 
-    <nav class="fixed w-full z-50 top-0 backdrop-blur-xl border-b border-[var(--border-color)]">
+    <nav class="fixed w-full z-50 top-0 backdrop-blur-md border-b border-[var(--border-color)]">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <i data-lucide="cpu" class="text-[var(--accent-color)]"></i>
-                <span class="font-bold tracking-tighter text-sm">RAJWANT SARMA</span>
+                <i data-lucide="cpu" class="text-[var(--accent-color)] w-5 h-5"></i>
+                <span class="font-extrabold tracking-tighter text-sm uppercase">Rajwant Sarma</span>
             </div>
             
             <div class="flex items-center gap-6">
-                <div class="hidden md:flex items-center gap-8 text-xs font-medium">
-                    <a href="#work" class="nav-link">WORK</a>
-                    <a href="resume.pdf" download class="text-[var(--accent-color)] font-bold border-b border-[var(--accent-color)]">DOWNLOAD CV</a>
+                <div class="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-widest">
+                    <a href="#work" class="nav-link">PROJECTS</a>
+                    <a href="#stack" class="nav-link">TECH STACK</a>
+                    <a href="resume.pdf" download class="text-[var(--accent-color)] hover:opacity-80 transition-opacity">RESUME.PDF</a>
                 </div>
                 
-                <button id="theme-btn" class="p-2 rounded-full border border-[var(--border-color)] hover:bg-[var(--text-main)] hover:bg-opacity-5 transition-all">
-                    <i data-lucide="sun" id="sun-icon"></i>
-                    <i data-lucide="moon" id="moon-icon" style="display:none;"></i>
+                <button id="theme-btn" class="w-10 h-10 flex items-center justify-center rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm hover:scale-105 transition-all">
+                    <i data-lucide="sun" id="sun-icon" class="w-4 h-4"></i>
+                    <i data-lucide="moon" id="moon-icon" class="w-4 h-4" style="display:none;"></i>
                 </button>
-
-                <a href="mailto:rajwant.sarma@gmail.com" class="text-xs font-medium nav-link">CONTACT</a>
             </div>
         </div>
     </nav>
 
     <section class="min-h-screen flex flex-col justify-center px-6 pt-20">
         <div class="max-w-6xl mx-auto w-full grid md:grid-cols-12 gap-12">
-            <div class="md:col-span-8 space-y-8">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border-color)] text-xs font-medium text-[var(--text-muted)]">
-                    <span class="relative flex h-2 w-2">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <div class="md:col-span-8 space-y-10">
+                <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-[var(--border-color)] bg-[var(--card-bg)] text-[11px] font-bold uppercase tracking-wider text-[var(--text-muted)] shadow-sm">
+                    <span class="flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-green-400 opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                     </span>
-                    Core Systems Active: Ready for Recruitment
+                    Recruitment Phase: 2026 Active
                 </div>
-                <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-none">
-                    Designing <br><span style="color: var(--text-muted)">Neural Intelligence.</span>
+                <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9]">
+                    Designing <br><span style="color: var(--text-muted)">Machine Intelligence.</span>
                 </h1>
-                <p class="text-xl md:text-2xl font-light max-w-2xl leading-relaxed opacity-80" style="color: var(--text-muted)">
+                <p class="text-xl md:text-2xl font-light max-w-2xl leading-relaxed opacity-90" style="color: var(--text-muted)">
                     I build institutional-grade AI systems and autonomous neural nodes. Based in Chennai, India.
                 </p>
                 
                 <div class="flex flex-wrap items-center gap-6 pt-4">
-                    <a href="resume.pdf" download class="btn-cv px-10 py-4 rounded-full flex items-center gap-3 text-lg">
-                        <i data-lucide="file-down"></i> DOWNLOAD RESUME (PDF)
+                    <a href="resume.pdf" download class="btn-resume px-10 py-4 rounded-2xl flex items-center gap-3 text-sm">
+                        <i data-lucide="file-text" class="w-4 h-4"></i> DOWNLOAD CV
                     </a>
-                    <a href="#work" class="px-8 py-4 border border-[var(--border-color)] rounded-full text-sm font-semibold hover:bg-[var(--text-main)] hover:bg-opacity-5 transition-all">
-                        View Projects
+                    <a href="#work" class="px-8 py-4 border border-[var(--border-color)] bg-[var(--card-bg)] rounded-2xl text-sm font-semibold shadow-sm hover:bg-opacity-50 transition-all">
+                        View Portfolio
                     </a>
                 </div>
             </div>
             
-            <div class="md:col-span-4 flex flex-col justify-end pb-4 border-l border-[var(--border-color)] pl-6 space-y-6">
-                <div><div class="text-3xl font-bold">3rd Year</div><div class="text-xs uppercase tracking-widest opacity-60">Electronics & Comp. Eng</div></div>
-                <div><div class="text-3xl font-bold">VIT Chennai</div><div class="text-xs uppercase tracking-widest opacity-60">7.3 CGPA</div></div>
-                <div><div class="text-3xl font-bold">3</div><div class="text-xs uppercase tracking-widest opacity-60">Live AI Deployments</div></div>
+            <div class="md:col-span-4 flex flex-col justify-end pb-4 border-l-2 border-[var(--border-color)] pl-8 space-y-8">
+                <div><div class="text-3xl font-bold">3rd Year</div><div class="text-[10px] font-bold uppercase tracking-widest opacity-60">Electronics & Comp. Eng</div></div>
+                <div><div class="text-3xl font-bold">VIT Chennai</div><div class="text-[10px] font-bold uppercase tracking-widest opacity-60">7.3 CGPA // VITU</div></div>
+                <div><div class="text-3xl font-bold">3</div><div class="text-[10px] font-bold uppercase tracking-widest opacity-60">Full-Stack AI Models</div></div>
             </div>
         </div>
     </section>
 
     <section id="work" class="py-32 border-t border-[var(--border-color)]">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-4xl font-bold tracking-tight mb-16">Operational Deployments</h2>
-            <div class="grid gap-8">
+            <h2 class="text-4xl font-extrabold tracking-tighter mb-16">Operational Deployments</h2>
+            <div class="grid gap-6">
                 
-                <div class="project-card p-8 md:p-12 rounded-3xl group">
+                <div class="project-card p-8 md:p-12 rounded-[2rem] group">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
                         <div class="max-w-xl">
-                            <span class="text-[var(--accent-color)] font-mono text-xs font-bold tracking-widest uppercase mb-2 block">FinTech // NLP</span>
+                            <span class="text-[var(--accent-color)] font-bold text-[10px] tracking-[0.2em] uppercase mb-3 block">FinTech // Natural Language Processing</span>
                             <h3 class="text-3xl font-bold mb-4">Sentinel Pro: Financial Sentiment</h3>
                             <p class="opacity-70 text-lg leading-relaxed mb-6">Real-time market intelligence engine using FinBERT-Tone for institutional-grade headline analysis.</p>
-                            <div class="flex gap-4 text-xs font-mono opacity-50">
-                                <span>PyTorch</span> • <span>Transformers</span> • <span>Streamlit</span>
+                            <div class="flex gap-4 text-[10px] font-bold uppercase tracking-widest opacity-40">
+                                <span>PyTorch</span> <span>•</span> <span>Transformers</span> <span>•</span> <span>Streamlit</span>
                             </div>
                         </div>
-                        <a href="https://sentinelanalyser.streamlit.app/" target="_blank" class="px-8 py-3 bg-[var(--text-main)] text-[var(--bg-color)] rounded-full font-bold flex items-center gap-2 whitespace-nowrap">
-                            <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+                        <a href="https://sentinelanalyser.streamlit.app/" target="_blank" class="px-8 py-4 bg-[var(--text-main)] text-[var(--bg-color)] rounded-2xl font-bold flex items-center gap-2 transition-transform active:scale-95">
+                            <i data-lucide="zap" class="w-4 h-4"></i> LIVE DEMO
                         </a>
                     </div>
                 </div>
 
-                <div class="project-card p-8 md:p-12 rounded-3xl group">
+                <div class="project-card p-8 md:p-12 rounded-[2rem] group">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
                         <div class="max-w-xl">
-                            <span class="text-red-500 font-mono text-xs font-bold tracking-widest uppercase mb-2 block">Autonomous // Computer Vision</span>
+                            <span class="text-red-500 font-bold text-[10px] tracking-[0.2em] uppercase mb-3 block">Autonomous // Computer Vision</span>
                             <h3 class="text-3xl font-bold mb-4">Apex Vision: Traffic Recognition</h3>
                             <p class="opacity-70 text-lg leading-relaxed mb-6">High-precision CNN node classifying 43 unique sign classes for autonomous vehicle subsystems.</p>
-                            <div class="flex gap-4 text-xs font-mono opacity-50">
-                                <span>TensorFlow</span> • <span>Keras</span> • <span>OpenCV</span>
+                            <div class="flex gap-4 text-[10px] font-bold uppercase tracking-widest opacity-40">
+                                <span>TensorFlow</span> <span>•</span> <span>Keras</span> <span>•</span> <span>OpenCV</span>
                             </div>
                         </div>
-                        <a href="https://apex-vision-ai.streamlit.app/" target="_blank" class="px-8 py-3 bg-[var(--text-main)] text-[var(--bg-color)] rounded-full font-bold flex items-center gap-2 whitespace-nowrap">
-                            <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+                        <a href="https://apex-vision-ai.streamlit.app/" target="_blank" class="px-8 py-4 bg-[var(--text-main)] text-[var(--bg-color)] rounded-2xl font-bold flex items-center gap-2 transition-transform active:scale-95">
+                            <i data-lucide="zap" class="w-4 h-4"></i> LIVE DEMO
                         </a>
                     </div>
                 </div>
@@ -169,15 +180,15 @@
         </div>
     </section>
 
-    <footer class="py-20 border-t border-[var(--border-color)] text-center">
+    <footer class="py-24 border-t border-[var(--border-color)] text-center">
         <div class="max-w-6xl mx-auto px-6">
-            <h4 class="text-xl font-bold mb-4">Rajwant Sarma</h4>
-            <div class="flex justify-center gap-8 text-sm font-medium mb-8">
-                <a href="mailto:rajwant.sarma@gmail.com" class="nav-link">Email</a>
-                <a href="https://linkedin.com/in/rajwant-sarma-67810528b/" target="_blank" class="nav-link">LinkedIn</a>
-                <a href="https://github.com/Roxstar21" target="_blank" class="nav-link">GitHub</a>
+            <h4 class="text-2xl font-bold tracking-tighter mb-6">Rajwant Ramasubramanian Sarma</h4>
+            <div class="flex justify-center gap-12 text-[11px] font-bold tracking-widest mb-10">
+                <a href="mailto:rajwant.sarma@gmail.com" class="nav-link uppercase">Email</a>
+                <a href="https://linkedin.com/in/rajwant-sarma-67810528b/" target="_blank" class="nav-link uppercase">LinkedIn</a>
+                <a href="https://github.com/Roxstar21" target="_blank" class="nav-link uppercase">GitHub</a>
             </div>
-            <p class="text-xs opacity-40 uppercase tracking-widest">3rd Year ECM // VIT Chennai // 2023-2027</p>
+            <p class="text-[9px] opacity-40 uppercase tracking-[0.4em]">ECM Student // VIT Chennai // 2023-2027</p>
         </div>
     </footer>
 
