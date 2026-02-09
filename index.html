@@ -10,169 +10,180 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* AESTHETIC THEME DEFINITIONS */
         :root {
-            --bg-color: #f4f4f5; /* Soft Zinc 100 - Not pure white */
-            --text-main: #18181b; /* Zinc 900 */
-            --text-muted: #52525b; /* Zinc 600 */
+            --bg-color: #f8f8f8;
+            --text-main: #050505;
+            --text-muted: #737373;
             --card-bg: #ffffff;
-            --border-color: rgba(0,0,0,0.08);
-            --accent-color: #0891b2; /* Cyan 600 */
-            --grid-opacity: 0.04;
+            --border-color: rgba(0,0,0,0.1);
+            --accent-color: #06b6d4;
         }
 
         [data-theme="dark"] {
-            --bg-color: #09090b; /* Zinc 950 */
-            --text-main: #fafafa; /* Zinc 50 */
-            --text-muted: #a1a1aa; /* Zinc 400 */
-            --card-bg: #18181b; /* Zinc 900 */
-            --border-color: rgba(255,255,255,0.06);
-            --accent-color: #22d3ee; /* Cyan 400 */
-            --grid-opacity: 0.03;
+            --bg-color: #050505;
+            --text-main: #ffffff;
+            --text-muted: #a3a3a3;
+            --card-bg: #0a0a0a;
+            --border-color: rgba(255,255,255,0.1);
+            --accent-color: #22d3ee;
         }
 
         body { 
             background-color: var(--bg-color); 
             color: var(--text-main); 
-            transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease;
+            transition: background-color 0.4s ease;
             font-family: 'Inter', sans-serif;
         }
 
+        /* PROFESSIONAL SLIDER TOGGLE */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--border-color);
+            transition: .4s;
+            border-radius: 34px;
+            border: 1px solid var(--border-color);
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px; width: 18px;
+            left: 4px; bottom: 3px;
+            background-color: var(--text-main);
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider:before { transform: translateX(24px); }
+
+        /* AESTHETIC RESUME BUTTON */
+        .resume-btn {
+            background-color: var(--text-main);
+            color: var(--bg-color);
+            padding: 12px 32px;
+            border-radius: 99px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        [data-theme="dark"] .resume-btn {
+            box-shadow: 0 10px 20px -5px rgba(255,255,255,0.1);
+        }
+        .resume-btn:hover { transform: translateY(-3px); opacity: 0.9; }
+
         .bg-grid {
+            position: fixed; inset: 0; z-index: -1;
             background-size: 40px 40px;
             background-image: linear-gradient(to right, var(--text-main) 1px, transparent 1px),
                               linear-gradient(to bottom, var(--text-main) 1px, transparent 1px);
-            opacity: var(--grid-opacity);
-            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            opacity: 0.03;
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
         }
-
         .project-card { 
-            background-color: var(--card-bg); 
+            background: var(--card-bg); 
             border: 1px solid var(--border-color);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .project-card:hover { 
-            border-color: var(--accent-color); 
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* AESTHETIC RESUME BUTTON */
-        .btn-resume {
-            background: linear-gradient(135deg, var(--accent-color), #3b82f6);
-            color: #ffffff;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-            box-shadow: 0 10px 15px -3px rgba(6, 182, 212, 0.25);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
-        .btn-resume:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 25px -5px rgba(6, 182, 212, 0.4);
-            filter: brightness(1.05);
-        }
-
-        .nav-link { color: var(--text-muted); transition: color 0.3s; }
-        .nav-link:hover { color: var(--text-main); }
     </style>
 </head>
 <body class="antialiased" data-theme="dark">
 
-    <div class="fixed inset-0 bg-grid pointer-events-none z-[-1]"></div>
+    <div class="bg-grid"></div>
 
-    <nav class="fixed w-full z-50 top-0 backdrop-blur-md border-b border-[var(--border-color)]">
+    <nav class="fixed w-full z-50 top-0 backdrop-blur-xl border-b border-[var(--border-color)]">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <i data-lucide="cpu" class="text-[var(--accent-color)] w-5 h-5"></i>
-                <span class="font-extrabold tracking-tighter text-sm uppercase">Rajwant Sarma</span>
-            </div>
+            <span class="text-sm font-extrabold tracking-tighter">RAJWANT SARMA</span>
             
-            <div class="flex items-center gap-6">
-                <div class="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-widest">
-                    <a href="#work" class="nav-link">PROJECTS</a>
-                    <a href="#stack" class="nav-link">TECH STACK</a>
-                    <a href="resume.pdf" download class="text-[var(--accent-color)] hover:opacity-80 transition-opacity">RESUME.PDF</a>
+            <div class="flex items-center gap-8">
+                <div class="hidden md:flex items-center gap-8 text-[10px] font-bold tracking-widest opacity-60">
+                    <a href="#work" class="hover:opacity-100 transition-opacity">WORK</a>
+                    <a href="mailto:rajwant.sarma@gmail.com" class="hover:opacity-100 transition-opacity">CONTACT</a>
                 </div>
-                
-                <button id="theme-btn" class="w-10 h-10 flex items-center justify-center rounded-xl border border-[var(--border-color)] bg-[var(--card-bg)] shadow-sm hover:scale-105 transition-all">
-                    <i data-lucide="sun" id="sun-icon" class="w-4 h-4"></i>
-                    <i data-lucide="moon" id="moon-icon" class="w-4 h-4" style="display:none;"></i>
-                </button>
+
+                <div class="flex items-center gap-3">
+                    <i data-lucide="moon" class="w-3 h-3 opacity-50"></i>
+                    <label class="switch">
+                        <input type="checkbox" id="theme-slider" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <i data-lucide="sun" class="w-3 h-3 opacity-50"></i>
+                </div>
             </div>
         </div>
     </nav>
 
     <section class="min-h-screen flex flex-col justify-center px-6 pt-20">
         <div class="max-w-6xl mx-auto w-full grid md:grid-cols-12 gap-12">
-            <div class="md:col-span-8 space-y-10">
-                <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-[var(--border-color)] bg-[var(--card-bg)] text-[11px] font-bold uppercase tracking-wider text-[var(--text-muted)] shadow-sm">
-                    <span class="flex h-2 w-2">
-                      <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-green-400 opacity-75"></span>
+            <div class="md:col-span-8 space-y-8">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border-color)] text-[10px] font-bold uppercase tracking-widest opacity-60">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                     </span>
-                    Recruitment Phase: 2026 Active
+                    Available for Internships
                 </div>
-                <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9]">
-                    Designing <br><span style="color: var(--text-muted)">Machine Intelligence.</span>
+                <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-none">
+                    Designing <br><span class="opacity-40">Machine Intelligence.</span>
                 </h1>
-                <p class="text-xl md:text-2xl font-light max-w-2xl leading-relaxed opacity-90" style="color: var(--text-muted)">
-                    I build institutional-grade AI systems and autonomous neural nodes. Based in Chennai, India.
+                <p class="text-xl md:text-2xl opacity-60 font-light max-w-2xl leading-relaxed">
+                    I am an AI Architect based in Chennai. I build scalable neural networks and deploy institutional-grade systems that solve complex problems.
                 </p>
-                
                 <div class="flex flex-wrap items-center gap-6 pt-4">
-                    <a href="resume.pdf" download class="btn-resume px-10 py-4 rounded-2xl flex items-center gap-3 text-sm">
-                        <i data-lucide="file-text" class="w-4 h-4"></i> DOWNLOAD CV
+                    <a href="resume.pdf" download class="resume-btn">
+                        <i data-lucide="download" class="w-5 h-5"></i> DOWNLOAD CV
                     </a>
-                    <a href="#work" class="px-8 py-4 border border-[var(--border-color)] bg-[var(--card-bg)] rounded-2xl text-sm font-semibold shadow-sm hover:bg-opacity-50 transition-all">
-                        View Portfolio
-                    </a>
+                    <a href="#work" class="text-sm font-bold border-b-2 border-current pb-1 hover:opacity-70 transition-opacity">View Projects</a>
                 </div>
             </div>
             
-            <div class="md:col-span-4 flex flex-col justify-end pb-4 border-l-2 border-[var(--border-color)] pl-8 space-y-8">
-                <div><div class="text-3xl font-bold">3rd Year</div><div class="text-[10px] font-bold uppercase tracking-widest opacity-60">Electronics & Comp. Eng</div></div>
-                <div><div class="text-3xl font-bold">VIT Chennai</div><div class="text-[10px] font-bold uppercase tracking-widest opacity-60">7.3 CGPA // VITU</div></div>
-                <div><div class="text-3xl font-bold">3</div><div class="text-[10px] font-bold uppercase tracking-widest opacity-60">Full-Stack AI Models</div></div>
+            <div class="md:col-span-4 flex flex-col justify-end pb-4 border-l border-[var(--border-color)] pl-6 space-y-6 opacity-60">
+                <div><div class="text-3xl font-bold">3rd Year</div><div class="text-[10px] uppercase tracking-widest mt-1">Electronics & Comp. Eng</div></div>
+                <div><div class="text-3xl font-bold">VIT</div><div class="text-[10px] uppercase tracking-widest mt-1">Chennai Institute</div></div>
+                <div><div class="text-3xl font-bold">3</div><div class="text-[10px] uppercase tracking-widest mt-1">Deployed AI Systems</div></div>
             </div>
         </div>
     </section>
 
     <section id="work" class="py-32 border-t border-[var(--border-color)]">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-4xl font-extrabold tracking-tighter mb-16">Operational Deployments</h2>
-            <div class="grid gap-6">
+            <h2 class="text-4xl font-extrabold tracking-tight mb-20">Selected Work</h2>
+            <div class="space-y-6">
                 
-                <div class="project-card p-8 md:p-12 rounded-[2rem] group">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-                        <div class="max-w-xl">
-                            <span class="text-[var(--accent-color)] font-bold text-[10px] tracking-[0.2em] uppercase mb-3 block">FinTech // Natural Language Processing</span>
-                            <h3 class="text-3xl font-bold mb-4">Sentinel Pro: Financial Sentiment</h3>
-                            <p class="opacity-70 text-lg leading-relaxed mb-6">Real-time market intelligence engine using FinBERT-Tone for institutional-grade headline analysis.</p>
-                            <div class="flex gap-4 text-[10px] font-bold uppercase tracking-widest opacity-40">
-                                <span>PyTorch</span> <span>•</span> <span>Transformers</span> <span>•</span> <span>Streamlit</span>
-                            </div>
+                <div class="project-card p-8 md:p-12 rounded-3xl">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div>
+                            <div class="flex items-center gap-3 mb-3"><span class="w-2 h-2 rounded-full bg-green-500"></span><span class="text-[10px] font-bold uppercase tracking-widest opacity-60">NLP</span></div>
+                            <h3 class="text-3xl font-bold mb-2">Sentinel Pro: Financial NLP</h3>
+                            <p class="opacity-60 max-w-xl text-lg font-light">Institutional-grade sentiment engine powered by FinBERT-Tone. Features &lt;50ms latency, bulk CSV processing, and a Bloomberg-style terminal.</p>
                         </div>
-                        <a href="https://sentinelanalyser.streamlit.app/" target="_blank" class="px-8 py-4 bg-[var(--text-main)] text-[var(--bg-color)] rounded-2xl font-bold flex items-center gap-2 transition-transform active:scale-95">
-                            <i data-lucide="zap" class="w-4 h-4"></i> LIVE DEMO
-                        </a>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/Roxstar21/Sentinel-Financial-NLP" target="_blank" class="p-3 border border-[var(--border-color)] rounded-full hover:bg-[var(--text-main)] hover:text-[var(--bg-color)] transition-all"><i data-lucide="github"></i></a>
+                            <a href="https://sentinelanalyser.streamlit.app/" target="_blank" class="px-8 py-3 bg-[var(--text-main)] text-[var(--bg-color)] rounded-full font-bold text-sm">Live Demo</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="project-card p-8 md:p-12 rounded-[2rem] group">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-                        <div class="max-w-xl">
-                            <span class="text-red-500 font-bold text-[10px] tracking-[0.2em] uppercase mb-3 block">Autonomous // Computer Vision</span>
-                            <h3 class="text-3xl font-bold mb-4">Apex Vision: Traffic Recognition</h3>
-                            <p class="opacity-70 text-lg leading-relaxed mb-6">High-precision CNN node classifying 43 unique sign classes for autonomous vehicle subsystems.</p>
-                            <div class="flex gap-4 text-[10px] font-bold uppercase tracking-widest opacity-40">
-                                <span>TensorFlow</span> <span>•</span> <span>Keras</span> <span>•</span> <span>OpenCV</span>
-                            </div>
+                <div class="project-card p-8 md:p-12 rounded-3xl">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div>
+                            <div class="flex items-center gap-3 mb-3"><span class="w-2 h-2 rounded-full bg-red-500"></span><span class="text-[10px] font-bold uppercase tracking-widest opacity-60">Computer Vision</span></div>
+                            <h3 class="text-3xl font-bold mb-2">Apex Vision // Autonomous</h3>
+                            <p class="opacity-60 max-w-xl text-lg font-light">High-precision CNN trained on the GTSRB dataset to classify 43 unique traffic signs. Legacy-compatible neural node for autonomous systems.</p>
                         </div>
-                        <a href="https://apex-vision-ai.streamlit.app/" target="_blank" class="px-8 py-4 bg-[var(--text-main)] text-[var(--bg-color)] rounded-2xl font-bold flex items-center gap-2 transition-transform active:scale-95">
-                            <i data-lucide="zap" class="w-4 h-4"></i> LIVE DEMO
-                        </a>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/Roxstar21/Apex-Vision-Traffic-AI" target="_blank" class="p-3 border border-[var(--border-color)] rounded-full hover:bg-[var(--text-main)] hover:text-[var(--bg-color)] transition-all"><i data-lucide="github"></i></a>
+                            <a href="https://apex-vision-ai.streamlit.app/" target="_blank" class="px-8 py-3 bg-[var(--text-main)] text-[var(--bg-color)] rounded-full font-bold text-sm">Live Demo</a>
+                        </div>
                     </div>
                 </div>
 
@@ -180,38 +191,21 @@
         </div>
     </section>
 
-    <footer class="py-24 border-t border-[var(--border-color)] text-center">
-        <div class="max-w-6xl mx-auto px-6">
-            <h4 class="text-2xl font-bold tracking-tighter mb-6">Rajwant Ramasubramanian Sarma</h4>
-            <div class="flex justify-center gap-12 text-[11px] font-bold tracking-widest mb-10">
-                <a href="mailto:rajwant.sarma@gmail.com" class="nav-link uppercase">Email</a>
-                <a href="https://linkedin.com/in/rajwant-sarma-67810528b/" target="_blank" class="nav-link uppercase">LinkedIn</a>
-                <a href="https://github.com/Roxstar21" target="_blank" class="nav-link uppercase">GitHub</a>
-            </div>
-            <p class="text-[9px] opacity-40 uppercase tracking-[0.4em]">ECM Student // VIT Chennai // 2023-2027</p>
-        </div>
+    <footer class="py-20 text-center opacity-40 text-[10px] font-bold tracking-[0.3em] uppercase">
+        Rajwant Sarma // VIT Chennai // 2023-2027
     </footer>
 
     <script>
         lucide.createIcons();
-
-        const themeBtn = document.getElementById('theme-btn');
-        const sunIcon = document.getElementById('sun-icon');
-        const moonIcon = document.getElementById('moon-icon');
+        const slider = document.getElementById('theme-slider');
         const body = document.body;
 
-        themeBtn.addEventListener('click', () => {
-            const currentTheme = body.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                body.setAttribute('data-theme', 'light');
-                sunIcon.style.display = 'none';
-                moonIcon.style.display = 'block';
-            } else {
+        slider.addEventListener('change', () => {
+            if (slider.checked) {
                 body.setAttribute('data-theme', 'dark');
-                sunIcon.style.display = 'block';
-                moonIcon.style.display = 'none';
+            } else {
+                body.setAttribute('data-theme', 'light');
             }
-            lucide.createIcons();
         });
     </script>
 </body>
