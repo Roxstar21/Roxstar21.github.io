@@ -4,194 +4,203 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rajwant Sarma | AI Architect</title>
-    <meta name="description" content="Portfolio of Rajwant Sarma - AI & Machine Learning Engineer">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <script>
-        tailwind.config = {
-            darkMode: 'class', // Critical for theme switching
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        black: '#050505',
-                        white: '#ffffff',
-                        grey: {
-                            50: '#fafafa',
-                            100: '#f5f5f5',
-                            500: '#737373',
-                            800: '#262626',
-                            900: '#171717',
-                        },
-                    },
-                    animation: { 'slide-up': 'slideUp 0.8s ease-out forwards' },
-                    keyframes: {
-                        slideUp: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
     <style>
-        /* Transitions for smooth theme switching */
-        * { transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
-        
-        body { @apply bg-white text-black dark:bg-black dark:text-white; }
-        
+        /* THEME COLOR DEFINITIONS */
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #050505;
+            --text-muted: #737373;
+            --card-bg: #f9f9f9;
+            --border-color: rgba(0,0,0,0.1);
+            --accent-color: #06b6d4;
+            --grid-opacity: 0.05;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #050505;
+            --text-main: #ffffff;
+            --text-muted: #a3a3a3;
+            --card-bg: #0f172a;
+            --border-color: rgba(255,255,255,0.1);
+            --accent-color: #22d3ee;
+            --grid-opacity: 0.03;
+        }
+
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            transition: background-color 0.4s ease, color 0.4s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
         .bg-grid {
             background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-            mask-image: linear-gradient(to bottom, white 40%, transparent 100%);
-        }
-        
-        .dark .bg-grid {
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-image: linear-gradient(to right, var(--text-main) 1px, transparent 1px),
+                              linear-gradient(to bottom, var(--text-main) 1px, transparent 1px);
+            opacity: var(--grid-opacity);
             mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
         }
 
-        .project-card { @apply border-black/5 bg-grey-50 dark:border-white/5 dark:bg-black; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-        .project-card:hover { @apply bg-grey-100 dark:bg-grey-900 border-black/20 dark:border-white/20; transform: translateY(-2px); }
+        .project-card { 
+            background-color: var(--card-bg); 
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        .project-card:hover { border-color: var(--accent-color); transform: translateY(-4px); }
         
-        .dark ::selection { background: #ffffff; color: #000000; }
-        ::selection { background: #000000; color: #ffffff; }
+        .nav-link { color: var(--text-muted); transition: color 0.2s; }
+        .nav-link:hover { color: var(--text-main); }
+
+        .btn-cv {
+            background-color: var(--accent-color);
+            color: #000;
+            font-weight: 700;
+            box-shadow: 0 0 15px var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        .btn-cv:hover { transform: scale(1.05); filter: brightness(1.1); }
     </style>
 </head>
-<body class="antialiased dark"> <div class="fixed inset-0 bg-grid pointer-events-none z-[-1]"></div>
+<body class="antialiased" data-theme="dark">
 
-    <nav class="fixed w-full z-50 top-0 bg-white/80 dark:bg-black/80 backdrop-blur-xl border-b border-black/5 dark:border-white/5">
+    <div class="fixed inset-0 bg-grid pointer-events-none z-[-1]"></div>
+
+    <nav class="fixed w-full z-50 top-0 backdrop-blur-xl border-b border-[var(--border-color)]">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="text-sm font-semibold tracking-tight hover:text-grey-500 transition-colors">RAJWANT SARMA</a>
+            <div class="flex items-center gap-2">
+                <i data-lucide="cpu" class="text-[var(--accent-color)]"></i>
+                <span class="font-bold tracking-tighter text-sm">RAJWANT SARMA</span>
+            </div>
             
-            <div class="flex items-center gap-6 md:gap-8">
-                <div class="hidden md:flex items-center gap-8 text-xs font-medium text-grey-500">
-                    <a href="#work" class="hover:text-black dark:hover:text-white transition-colors">WORK</a>
-                    <a href="#stack" class="hover:text-black dark:hover:text-white transition-colors">STACK</a>
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex items-center gap-8 text-xs font-medium">
+                    <a href="#work" class="nav-link">WORK</a>
+                    <a href="resume.pdf" download class="text-[var(--accent-color)] font-bold border-b border-[var(--accent-color)]">DOWNLOAD CV</a>
                 </div>
                 
-                <button id="theme-toggle" class="p-2 rounded-full border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 transition-all">
-                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
-                    <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+                <button id="theme-btn" class="p-2 rounded-full border border-[var(--border-color)] hover:bg-[var(--text-main)] hover:bg-opacity-5 transition-all">
+                    <i data-lucide="sun" id="sun-icon"></i>
+                    <i data-lucide="moon" id="moon-icon" style="display:none;"></i>
                 </button>
 
-                <a href="mailto:rajwant.sarma@gmail.com" class="text-xs font-medium text-grey-500 hover:text-black dark:hover:text-white transition-colors">CONTACT</a>
+                <a href="mailto:rajwant.sarma@gmail.com" class="text-xs font-medium nav-link">CONTACT</a>
             </div>
         </div>
     </nav>
 
     <section class="min-h-screen flex flex-col justify-center px-6 pt-20">
         <div class="max-w-6xl mx-auto w-full grid md:grid-cols-12 gap-12">
-            <div class="md:col-span-8 space-y-8 animate-slide-up">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-xs font-medium text-grey-500">
+            <div class="md:col-span-8 space-y-8">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border-color)] text-xs font-medium text-[var(--text-muted)]">
                     <span class="relative flex h-2 w-2">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                     </span>
-                    Open to Internships & Roles
+                    Core Systems Active: Ready for Recruitment
                 </div>
                 <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-none">
-                    Designing <br><span class="text-grey-500">Machine Intelligence.</span>
+                    Designing <br><span style="color: var(--text-muted)">Neural Intelligence.</span>
                 </h1>
-                <p class="text-xl md:text-2xl text-grey-500 font-light max-w-2xl leading-relaxed">
-                    I am an AI Architect based in Chennai. I build scalable neural networks and deploy institutional-grade systems that solve complex problems.
+                <p class="text-xl md:text-2xl font-light max-w-2xl leading-relaxed opacity-80" style="color: var(--text-muted)">
+                    I build institutional-grade AI systems and autonomous neural nodes. Based in Chennai, India.
                 </p>
+                
                 <div class="flex flex-wrap items-center gap-6 pt-4">
-                    <a href="#work" class="px-8 py-3 bg-black dark:bg-white text-white dark:text-black text-sm font-semibold rounded-full hover:opacity-80 transition-colors">View Projects</a>
-                    <a href="resume.pdf" download class="px-8 py-3 border border-black/20 dark:border-white/20 text-black dark:text-white text-sm font-semibold rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors flex items-center gap-2">
-                        <i data-lucide="download" class="w-4 h-4"></i> Download CV
+                    <a href="resume.pdf" download class="btn-cv px-10 py-4 rounded-full flex items-center gap-3 text-lg">
+                        <i data-lucide="file-down"></i> DOWNLOAD RESUME (PDF)
                     </a>
-                    <a href="https://github.com/Roxstar21" target="_blank" class="flex items-center gap-2 text-sm font-medium text-grey-500 hover:text-black dark:hover:text-white transition-colors ml-2">
-                        <i data-lucide="github" class="w-4 h-4"></i> GitHub
+                    <a href="#work" class="px-8 py-4 border border-[var(--border-color)] rounded-full text-sm font-semibold hover:bg-[var(--text-main)] hover:bg-opacity-5 transition-all">
+                        View Projects
                     </a>
                 </div>
             </div>
-            <div class="md:col-span-4 flex flex-col justify-end pb-4 animate-slide-up" style="animation-delay: 0.2s;">
-                <div class="border-l border-black/10 dark:border-white/10 pl-6 space-y-6">
-                    <div><div class="text-3xl font-bold">3rd Year</div><div class="text-xs text-grey-500 uppercase tracking-widest mt-1">Electronics & Comp. Eng</div></div>
-                    <div><div class="text-3xl font-bold">VIT</div><div class="text-xs text-grey-500 uppercase tracking-widest mt-1">Chennai Institute</div></div>
-                    <div><div class="text-3xl font-bold">3</div><div class="text-xs text-grey-500 uppercase tracking-widest mt-1">Deployed AI Systems</div></div>
-                </div>
+            
+            <div class="md:col-span-4 flex flex-col justify-end pb-4 border-l border-[var(--border-color)] pl-6 space-y-6">
+                <div><div class="text-3xl font-bold">3rd Year</div><div class="text-xs uppercase tracking-widest opacity-60">Electronics & Comp. Eng</div></div>
+                <div><div class="text-3xl font-bold">VIT Chennai</div><div class="text-xs uppercase tracking-widest opacity-60">7.3 CGPA</div></div>
+                <div><div class="text-3xl font-bold">3</div><div class="text-xs uppercase tracking-widest opacity-60">Live AI Deployments</div></div>
             </div>
         </div>
     </section>
 
-    <section id="stack" class="py-32 border-t border-black/5 dark:border-white/5">
+    <section id="work" class="py-32 border-t border-[var(--border-color)]">
         <div class="max-w-6xl mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div class="text-sm font-medium text-grey-500 uppercase tracking-widest">Core Stack</div>
-                <div class="md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8">
-                    <div class="group"><div class="text-black dark:text-white text-lg font-semibold mb-2 group-hover:translate-x-2 transition-transform duration-300">TensorFlow & Keras</div><div class="text-grey-500 text-sm">Deep Learning Architecture</div></div>
-                    <div class="group"><div class="text-black dark:text-white text-lg font-semibold mb-2 group-hover:translate-x-2 transition-transform duration-300">PyTorch</div><div class="text-grey-500 text-sm">Research & NLP</div></div>
-                    <div class="group"><div class="text-black dark:text-white text-lg font-semibold mb-2 group-hover:translate-x-2 transition-transform duration-300">Computer Vision</div><div class="text-grey-500 text-sm">OpenCV, CNNs, YOLO</div></div>
-                    <div class="group"><div class="text-black dark:text-white text-lg font-semibold mb-2 group-hover:translate-x-2 transition-transform duration-300">LLMs & Transformers</div><div class="text-grey-500 text-sm">HuggingFace, BERT, FinBERT</div></div>
-                    <div class="group"><div class="text-black dark:text-white text-lg font-semibold mb-2 group-hover:translate-x-2 transition-transform duration-300">Data Science</div><div class="text-grey-500 text-sm">Pandas, NumPy, Scikit-learn</div></div>
-                    <div class="group"><div class="text-black dark:text-white text-lg font-semibold mb-2 group-hover:translate-x-2 transition-transform duration-300">Deployment</div><div class="text-grey-500 text-sm">Streamlit, Docker, Git</div></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="work" class="py-32 border-t border-black/5 dark:border-white/5">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="flex justify-between items-end mb-20">
-                <h2 class="text-4xl font-bold tracking-tight">Selected Work</h2>
-                <a href="https://github.com/Roxstar21" target="_blank" class="text-sm text-grey-500 hover:text-black dark:hover:text-white transition-colors flex items-center gap-2">View Archive <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-            </div>
-            <div class="space-y-6">
-                <div class="project-card block p-8 md:p-12 rounded-2xl border">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                        <div>
-                            <div class="flex items-center gap-3 mb-3"><span class="w-2 h-2 rounded-full bg-green-500"></span><span class="text-xs font-medium text-grey-500 uppercase tracking-widest">Natural Language Processing</span></div>
-                            <h3 class="text-3xl font-bold mb-2">Sentinel Pro: Financial NLP</h3>
-                            <p class="text-grey-500 max-w-xl text-lg font-light">Institutional-grade sentiment engine powered by FinBERT-Tone. Features <50ms latency, bulk CSV processing, and a Bloomberg-style terminal.</p>
-                            <div class="mt-4 flex gap-3 text-xs font-mono text-grey-500"><span>PyTorch</span> • <span>Transformers</span> • <span>Streamlit</span></div>
+            <h2 class="text-4xl font-bold tracking-tight mb-16">Operational Deployments</h2>
+            <div class="grid gap-8">
+                
+                <div class="project-card p-8 md:p-12 rounded-3xl group">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+                        <div class="max-w-xl">
+                            <span class="text-[var(--accent-color)] font-mono text-xs font-bold tracking-widest uppercase mb-2 block">FinTech // NLP</span>
+                            <h3 class="text-3xl font-bold mb-4">Sentinel Pro: Financial Sentiment</h3>
+                            <p class="opacity-70 text-lg leading-relaxed mb-6">Real-time market intelligence engine using FinBERT-Tone for institutional-grade headline analysis.</p>
+                            <div class="flex gap-4 text-xs font-mono opacity-50">
+                                <span>PyTorch</span> • <span>Transformers</span> • <span>Streamlit</span>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-4">
-                            <a href="https://github.com/Roxstar21/Sentinel-Financial-NLP" target="_blank" class="text-grey-500 hover:text-black dark:hover:text-white transition-colors flex items-center gap-2 text-sm font-medium"><i data-lucide="github" class="w-4 h-4"></i> Source</a>
-                            <a href="https://sentinelanalyser.streamlit.app/" target="_blank" class="bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-full hover:opacity-80 transition-colors flex items-center gap-2 text-sm font-bold"><i data-lucide="external-link" class="w-4 h-4"></i> Live Demo</a>
-                        </div>
+                        <a href="https://sentinelanalyser.streamlit.app/" target="_blank" class="px-8 py-3 bg-[var(--text-main)] text-[var(--bg-color)] rounded-full font-bold flex items-center gap-2 whitespace-nowrap">
+                            <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+                        </a>
                     </div>
                 </div>
+
+                <div class="project-card p-8 md:p-12 rounded-3xl group">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+                        <div class="max-w-xl">
+                            <span class="text-red-500 font-mono text-xs font-bold tracking-widest uppercase mb-2 block">Autonomous // Computer Vision</span>
+                            <h3 class="text-3xl font-bold mb-4">Apex Vision: Traffic Recognition</h3>
+                            <p class="opacity-70 text-lg leading-relaxed mb-6">High-precision CNN node classifying 43 unique sign classes for autonomous vehicle subsystems.</p>
+                            <div class="flex gap-4 text-xs font-mono opacity-50">
+                                <span>TensorFlow</span> • <span>Keras</span> • <span>OpenCV</span>
+                            </div>
+                        </div>
+                        <a href="https://apex-vision-ai.streamlit.app/" target="_blank" class="px-8 py-3 bg-[var(--text-main)] text-[var(--bg-color)] rounded-full font-bold flex items-center gap-2 whitespace-nowrap">
+                            <i data-lucide="external-link" class="w-4 h-4"></i> Live Demo
+                        </a>
+                    </div>
                 </div>
+
+            </div>
         </div>
     </section>
 
-    <footer class="py-20 border-t border-black/5 dark:border-white/5">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-            <div><h4 class="text-lg font-bold mb-1">Rajwant Sarma</h4><p class="text-grey-500 text-sm">AI Architect & Data Scientist</p></div>
-            <div class="flex gap-8 text-sm font-medium text-grey-500">
-                <a href="mailto:rajwant.sarma@gmail.com" class="hover:text-black dark:hover:text-white transition-colors">Email</a>
-                <a href="https://linkedin.com/in/rajwant-sarma-67810528b/" target="_blank" class="hover:text-black dark:hover:text-white transition-colors">LinkedIn</a>
-                <a href="https://github.com/Roxstar21" target="_blank" class="hover:text-black dark:hover:text-white transition-colors">GitHub</a>
+    <footer class="py-20 border-t border-[var(--border-color)] text-center">
+        <div class="max-w-6xl mx-auto px-6">
+            <h4 class="text-xl font-bold mb-4">Rajwant Sarma</h4>
+            <div class="flex justify-center gap-8 text-sm font-medium mb-8">
+                <a href="mailto:rajwant.sarma@gmail.com" class="nav-link">Email</a>
+                <a href="https://linkedin.com/in/rajwant-sarma-67810528b/" target="_blank" class="nav-link">LinkedIn</a>
+                <a href="https://github.com/Roxstar21" target="_blank" class="nav-link">GitHub</a>
             </div>
+            <p class="text-xs opacity-40 uppercase tracking-widest">3rd Year ECM // VIT Chennai // 2023-2027</p>
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
 
-        // Theme Toggle Logic
-        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeBtn = document.getElementById('theme-btn');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
         const body = document.body;
 
-        // Check for saved theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            body.classList.remove('dark');
-        }
-
-        themeToggleBtn.addEventListener('click', () => {
-            body.classList.toggle('dark');
-            const theme = body.classList.contains('dark') ? 'dark' : 'light';
-            localStorage.setItem('theme', theme);
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+            lucide.createIcons();
         });
     </script>
 </body>
